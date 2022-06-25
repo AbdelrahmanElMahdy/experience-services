@@ -2,7 +2,12 @@ import {
     CandidateExperienceRepository,
     CandidateTagRepository,
 } from './experience.repository';
-import { CandidateExperienceWithTagI } from '../../utils/interfaces/experience.interface';
+import {
+    addCandidateExperienceI,
+    CandidateExperienceI,
+    CandidateExperienceWithTagI,
+    CandidateTagI,
+} from '../../utils/interfaces/experience.interface';
 import ErrorI from '../../utils/interfaces/ecxeptions.interface';
 import { notFound } from '../../utils/exceptions/http.exception';
 class ExperienceService {
@@ -29,7 +34,34 @@ class ExperienceService {
             throw new Error('Unable to get retrieve candidate');
         }
     }
+    public async addCandidateExperience(
+        input: addCandidateExperienceI
+    ): Promise<boolean> {
+        try {
+            let candidate_id:number = input.candidate_id;
+            let db_experience: CandidateExperienceI[] = [];
+            let db_tags: CandidateTagI[] = [];
 
+            // preparing for the bulk create 
+            input.companies.map((company) =>
+                db_experience.push({
+                    candidate_id: candidate_id,
+                    company_name: company.company_name,
+                    role: company.role,
+                })
+            );
+            input.tags.map((tag) =>
+                db_tags.push({ candidate_id: candidate_id, tag_name: tag })
+            );
+
+            await this.experienceRepo.bulkCreate(db_experience as any);
+            await this.tagsRpo.bulkCreate(db_tags as any);
+
+            return true;
+        } catch (error) {
+            throw new Error('Unable to get retrieve candidate');
+        }
+    }
     /**
      * get all Candidate
      */

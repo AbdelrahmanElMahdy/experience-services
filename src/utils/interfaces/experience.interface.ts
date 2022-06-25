@@ -12,7 +12,7 @@ interface CandidateTagI {
 }
 
 interface CandidateExperienceWithTagI{
-    tags: CandidateTagI[]
+    tags: string[]
     companies: CandidateExperienceI[]
 }
 export { CandidateTagI, CandidateExperienceI, CandidateExperienceWithTagI};

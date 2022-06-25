@@ -21,9 +21,12 @@ class ExperienceService {
             });
             let candidateTag = await this.tagsRpo.findAll({
                 where: { candidate_id: candidate_id },
-            });
+            })
+            
+            let tags:string[] = []
+            candidateTag.map(tag => tags.push(tag.tag_name))
 
-            return { tags: candidateTag, companies: candidateExperience };
+            return { tags:tags, companies: candidateExperience };
         } catch (error) {
             throw new Error('Unable to create Candidate');
         }

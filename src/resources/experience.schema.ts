@@ -12,7 +12,7 @@ type CandidateTags{
     tag_name:String!
 }
 type candidatesExperienceWithTags{
-    tags:[CandidateTags]
+    tags:[String]
     companies:[candidatesExperience]
 
 }

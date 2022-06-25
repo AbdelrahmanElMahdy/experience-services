@@ -12,7 +12,7 @@ import {
 import {
     CandidateExperienceI,
     CandidateTagI,
-} from '../utils/interfaces/experience.interface';
+} from '../../utils/interfaces/experience.interface';
 
 @Table({
     tableName: 'candidate_experience',

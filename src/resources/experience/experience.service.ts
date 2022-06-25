@@ -4,7 +4,7 @@ import {
 } from './experience.repository';
 import {
     CandidateExperienceWithTagI,
-} from '../utils/interfaces/experience.interface';
+} from '../../utils/interfaces/experience.interface';
 
 class ExperienceService {
     private experienceRepo = CandidateExperienceRepository;

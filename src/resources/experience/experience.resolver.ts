@@ -1,4 +1,4 @@
-import { CandidateExperienceWithTagI } from '../utils/interfaces/experience.interface';
+import { CandidateExperienceWithTagI } from '../../utils/interfaces/experience.interface';
 import ExperienceService from './experience.service';
 
 const experienceService = new ExperienceService();

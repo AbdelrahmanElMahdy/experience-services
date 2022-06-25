@@ -34,15 +34,30 @@ class ExperienceService {
             throw new Error('Unable to get retrieve candidate');
         }
     }
+    public async deleteCandidateExperience(
+        experienceId: number
+    ): Promise<Boolean> {
+        try {
+            let experience = await this.experienceRepo.findOne({where:{ id: experienceId }})
+            if (! experience) throw new Error("can't find entity")
+            await this.experienceRepo.destroy({
+                where: { id: experienceId },
+            });
+            
+            return true;
+        } catch (error) {
+            throw error;
+        }
+    }
     public async addCandidateExperience(
         input: addCandidateExperienceI
     ): Promise<boolean> {
         try {
-            let candidate_id:number = input.candidate_id;
+            let candidate_id: number = input.candidate_id;
             let db_experience: CandidateExperienceI[] = [];
             let db_tags: CandidateTagI[] = [];
 
-            // preparing for the bulk create 
+            // preparing for the bulk create
             input.companies.map((company) =>
                 db_experience.push({
                     candidate_id: candidate_id,

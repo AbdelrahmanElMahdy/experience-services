@@ -35,7 +35,7 @@ type Query {
 }
 type Mutation{
     addCandidateExperience(input:addCandidateExperienceInput): Boolean
-
+    deleteCandidateExperience(experienceId:Int!):Boolean
 }
 
 `;

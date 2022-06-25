@@ -1,10 +1,9 @@
-interface ExperienceI {
+interface CandidateExperienceI {
     id?: number;
     candidate_id: number;
     company_name: string;
     role: string;
 }
-
 
 interface CandidateTagI {
     id?: number;
@@ -12,4 +11,8 @@ interface CandidateTagI {
     tag_name: string;
 }
 
-export {CandidateTagI, ExperienceI}
+interface CandidateExperienceWithTagI{
+    tags: CandidateTagI[]
+    companies: CandidateExperienceI[]
+}
+export { CandidateTagI, CandidateExperienceI, CandidateExperienceWithTagI};

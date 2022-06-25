@@ -10,17 +10,17 @@ import {
 } from 'sequelize-typescript';
 
 import {
-    ExperienceI,
+    CandidateExperienceI,
     CandidateTagI,
 } from '../utils/interfaces/experience.interface';
 
 @Table({
-    tableName: 'candidates_experiment',
+    tableName: 'candidate_experience',
     timestamps: false,
 })
-class CandidateExperimentRepository
+class CandidateExperienceRepository
     extends Model
-    implements ExperienceI
+    implements CandidateExperienceI
 {
     @AutoIncrement
     @PrimaryKey
@@ -47,10 +47,7 @@ class CandidateExperimentRepository
     tableName: 'candidate_tags',
     timestamps: false,
 })
-class CandidateTagRepository
-    extends Model
-    implements CandidateTagI
-{
+class CandidateTagRepository extends Model implements CandidateTagI {
     @AutoIncrement
     @PrimaryKey
     @Column(DataType.INTEGER)
@@ -67,4 +64,4 @@ class CandidateTagRepository
     tag_name!: string;
 }
 
-export {CandidateExperimentRepository, CandidateTagRepository};
+export { CandidateExperienceRepository, CandidateTagRepository };

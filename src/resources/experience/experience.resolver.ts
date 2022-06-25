@@ -1,3 +1,4 @@
+import ErrorI from '../../utils/interfaces/ecxeptions.interface';
 import { CandidateExperienceWithTagI } from '../../utils/interfaces/experience.interface';
 import ExperienceService from './experience.service';
 
@@ -9,13 +10,14 @@ export default {
     },
     retrieveCandidateExperience: async (input: {
         candidate_id: number;
-    }): Promise<CandidateExperienceWithTagI | void> => {
+    }): Promise<CandidateExperienceWithTagI> => {
         try {
             return await experienceService.getRetrieveCandidatesExperience(
                 input.candidate_id
             );
         } catch (error) {
             console.log(error);
+            throw error
         }
     },
 };

@@ -8,8 +8,6 @@ import {
     CandidateExperienceWithTagI,
     CandidateTagI,
 } from '../../utils/interfaces/experience.interface';
-import ErrorI from '../../utils/interfaces/ecxeptions.interface';
-import { notFound } from '../../utils/exceptions/http.exception';
 class ExperienceService {
     private experienceRepo = CandidateExperienceRepository;
     private tagsRpo = CandidateTagRepository;

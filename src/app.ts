@@ -8,14 +8,12 @@ import { Sequelize } from 'sequelize-typescript';
 import {
     CandidateExperienceRepository,
     CandidateTagRepository,
-} from './resources/experience.repository';
-import ErrorMiddleware from './middleware/error.middleware';
-import Controller from './utils/interfaces/controller.interface';
+} from './resources/experience/experience.repository';
 
 import { buildSchema } from 'graphql';
 import { graphqlHTTP } from 'express-graphql';
-import experienceSchema from './resources/experience.schema';
-import experienceResolver from './resources/experience.resolver';
+import experienceSchema from './resources/experience/experience.schema';
+import experienceResolver from './resources/experience/experience.resolver';
 class App {
     public express: Application;
     public port: number = 5000;

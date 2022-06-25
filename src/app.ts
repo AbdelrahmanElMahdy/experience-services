@@ -9,8 +9,8 @@ import {
     CandidateExperienceRepository,
     CandidateTagRepository,
 } from './resources/experience/experience.repository';
-
-import { buildSchema } from 'graphql';
+import authenticatedMiddleware from './middleware/authenticate.middleware';
+import { buildSchema, GraphQLError } from 'graphql';
 import { graphqlHTTP } from 'express-graphql';
 import experienceSchema from './resources/experience/experience.schema';
 import experienceResolver from './resources/experience/experience.resolver';
@@ -33,6 +33,7 @@ class App {
         this.express.use(express.json());
         this.express.use(express.urlencoded({ extended: false }));
         this.express.use(compression());
+        this.express.use(authenticatedMiddleware)
     }
     private initializeControllers(): void {
         this.express.use(
@@ -41,6 +42,7 @@ class App {
                 schema: buildSchema(experienceSchema),
                 rootValue: experienceResolver,
                 graphiql: true,
+                context:({req}:any)=>({req})
             })
         );
     }

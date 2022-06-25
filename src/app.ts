@@ -26,7 +26,6 @@ class App {
 
         this.initializeMiddleware();
         this.initializeControllers();
-        this.initializeErrorHandling();
         this.initializeDateBase();
     }
     private initializeMiddleware(): void {
@@ -36,9 +35,6 @@ class App {
         this.express.use(express.json());
         this.express.use(express.urlencoded({ extended: false }));
         this.express.use(compression());
-    }
-    private initializeErrorHandling(): void {
-        this.express.use(ErrorMiddleware);
     }
     private initializeControllers(): void {
         this.express.use(

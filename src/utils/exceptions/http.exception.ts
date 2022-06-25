@@ -1,12 +1,7 @@
-class HttpException extends Error {
-    public status: number;
-    public message: string;
-
-    constructor(status: number, message: string) {
-        super(message);
-        this.status = status;
-        this.message = message;
-    }
-}
-
-export default HttpException;
+export enum errorStatus {
+    notFound = 'NOT_FOUND',
+    error = 'ERROR',
+  }
+  
+export const notFound = (message: string) => ({ status: errorStatus.notFound, message });
+export const error = (message: string) => ({ status: errorStatus.error, message });

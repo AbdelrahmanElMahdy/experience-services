@@ -22,8 +22,10 @@ let's run this project
 
 -   docker specific
     -   `docker build -t experience . `
--  normal
+-   normal
     -   make sure you have node.js & npm installed on your machine
     -   go inside root folder where package.json and run `npm install` to install required dependencies
 
-**now, server is running** 
+**now, server is running**
+
+> you can find some of apis postman documentation for this project here [postman doc](https://documenter.getpostman.com/view/13580360/UzBsH4Yd)

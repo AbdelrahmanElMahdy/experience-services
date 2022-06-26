@@ -21,7 +21,7 @@ let's run this project
     -   normal running
 
 -   docker specific
-    -   `docker build -t candidate . `
+    -   `docker build -t experience . `
 -  normal
     -   make sure you have node.js & npm installed on your machine
     -   go inside root folder where package.json and run `npm install` to install required dependencies

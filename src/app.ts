@@ -66,6 +66,7 @@ class App {
             dialect: 'postgres',
             port: Number(process.env.DB_PORT),
             models: [CandidateExperienceRepository, CandidateTagRepository],
+            logging:false
         });
         try {
             await sequelize.authenticate();

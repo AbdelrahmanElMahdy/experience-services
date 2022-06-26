@@ -14,6 +14,8 @@ import { buildSchema, GraphQLError } from 'graphql';
 import { graphqlHTTP } from 'express-graphql';
 import experienceSchema from './resources/experience/experience.schema';
 import experienceResolver from './resources/experience/experience.resolver';
+
+import { v4 } from 'uuid';
 class App {
     public express: Application;
     public port: number = 5000;
@@ -43,6 +45,15 @@ class App {
                 rootValue: experienceResolver,
                 graphiql: true,
                 context: { candidate_id: request.candidate_id },
+                customFormatErrorFn: (error: GraphQLError): any => {
+                    let error_uuid: any = v4();
+                    console.log({ error: error.message, error_uuid });
+                    return {
+                        status: 'error',
+                        message: error.message,
+                        error_uuid,
+                    };
+                },
             }))
         );
     }

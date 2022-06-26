@@ -24,9 +24,8 @@ input candidateExperienceInput{
 }
 
 input addCandidateExperienceInput{
-    candidate_id: Int!
     tags:[String]
-    companies:[candidateExperienceInput]
+    company:candidateExperienceInput
 }
 
 type Query {

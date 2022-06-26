@@ -1,6 +1,6 @@
 import ErrorI from '../../utils/interfaces/ecxeptions.interface';
 import {
-    addCandidateExperienceI,
+    AddExperienceI,
     CandidateExperienceWithTagI,
 } from '../../utils/interfaces/experience.interface';
 import ExperienceService from './experience.service';
@@ -23,13 +23,22 @@ export default {
             throw error;
         }
     },
-    addCandidateExperience: async ({
-        input,
-    }: {
-        input: addCandidateExperienceI;
-    }): Promise<Boolean> => {
+    addCandidateExperience: async (
+        {
+            input,
+        }: {
+            input: AddExperienceI;
+        },
+        context: any
+    ): Promise<Boolean> => {
         try {
-            return await experienceService.addCandidateExperience(input);
+            let current_candidate_id = context.candidate_id;
+
+            console.log(current_candidate_id)
+            return await experienceService.addCandidateExperience(
+                input,
+                current_candidate_id
+            );
         } catch (error) {
             console.log(error);
             throw error;

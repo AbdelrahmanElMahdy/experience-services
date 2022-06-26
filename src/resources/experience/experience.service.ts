@@ -3,7 +3,7 @@ import {
     CandidateTagRepository,
 } from './experience.repository';
 import {
-    addCandidateExperienceI,
+    AddExperienceI,
     CandidateExperienceI,
     CandidateExperienceWithTagI,
     CandidateTagI,
@@ -53,26 +53,26 @@ class ExperienceService {
         }
     }
     public async addCandidateExperience(
-        input: addCandidateExperienceI
+        input: AddExperienceI,
+        current_candidate_id: number
     ): Promise<boolean> {
         try {
-            let candidate_id: number = input.candidate_id;
-            let db_experience: CandidateExperienceI[] = [];
+            let db_experience: CandidateExperienceI = input.company;
             let db_tags: CandidateTagI[] = [];
 
             // preparing for the bulk create
-            input.companies.map((company) =>
-                db_experience.push({
-                    candidate_id: candidate_id,
-                    company_name: company.company_name,
-                    role: company.role,
+            input.tags.map((tag) =>
+                db_tags.push({
+                    candidate_id: current_candidate_id,
+                    tag_name: tag,
                 })
             );
-            input.tags.map((tag) =>
-                db_tags.push({ candidate_id: candidate_id, tag_name: tag })
-            );
 
-            await this.experienceRepo.bulkCreate(db_experience as any);
+            await this.experienceRepo.create({
+                candidate_id: current_candidate_id,
+                company_name: db_experience.company_name,
+                role: db_experience.role,
+            });
             await this.tagsRpo.bulkCreate(db_tags as any);
 
             return true;
@@ -80,9 +80,6 @@ class ExperienceService {
             throw new Error('Unable to get retrieve candidate');
         }
     }
-    /**
-     * get all Candidate
-     */
 }
 
 export default ExperienceService;

@@ -6,8 +6,8 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import { Sequelize } from 'sequelize-typescript';
 import {
-    CandidateExperienceRepository,
-    CandidateTagRepository,
+    ExperienceRepository,
+    TagRepository,
 } from './resources/experience/experience.repository';
 import authenticatedMiddleware from './middleware/authenticate.middleware';
 import { buildSchema, GraphQLError } from 'graphql';
@@ -65,8 +65,8 @@ class App {
             host: process.env.DB_HOST,
             dialect: 'postgres',
             port: Number(process.env.DB_PORT),
-            models: [CandidateExperienceRepository, CandidateTagRepository],
-            logging:false
+            models: [ExperienceRepository, TagRepository],
+            logging: false,
         });
         try {
             await sequelize.authenticate();

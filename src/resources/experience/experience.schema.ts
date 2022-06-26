@@ -13,28 +13,28 @@ type CandidateTags{
     tag_name:String!
 }
 
-type candidateExperienceWithTags{
+type experienceWithTags{
     tags:[String]
     companies:[candidateExperience]
 }
 
-input candidateExperienceInput{
+input experienceInput{
     company_name: String!
     role:String!
 }
 
-input addCandidateExperienceInput{
+input addExperienceInput{
     tags:[String]
-    company:candidateExperienceInput
+    company:experienceInput
 }
 
 type Query {
-    helloworld: String
-    retrieveCandidateExperience(candidate_id:Int!):candidateExperienceWithTags
+    isAlive: String
+    retrieveCandidateExperience(candidate_id:Int!):experienceWithTags
 }
 type Mutation{
-    addCandidateExperience(input:addCandidateExperienceInput): Boolean
-    deleteCandidateExperience(experienceId:Int!):Boolean
+    addExperience(input:addExperienceInput): Boolean
+    deleteExperience(experienceId:Int!):Boolean
 }
 
 `;

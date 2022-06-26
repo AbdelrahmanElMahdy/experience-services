@@ -25,7 +25,7 @@ describe('EXPERIENCE', () => {
             throw error;
         }
     });
-    it('Hello World server', async () => {
+    it('Alive server', async () => {
         try {
             let response: any = await request(app.express)
                 .get('/graphql')
@@ -33,7 +33,7 @@ describe('EXPERIENCE', () => {
                     Authorization:
                         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTUsImlhdCI6MTY1NjE4MzM4NiwiZXhwIjoxNjU2MjY5Nzg2fQ.JuIe4nbTopd__fk7DydS9M7Qlbtl_ZZGM5QjUV1NZKE',
                 })
-                .send({ query: '{helloworld}' });
+                .send({ query: '{isAlive}' });
             expect(response.status).to.equal(200);
             expect(response.body).to.haveOwnProperty('data');
         } catch (error) {

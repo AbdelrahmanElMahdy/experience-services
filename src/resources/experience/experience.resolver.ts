@@ -1,21 +1,21 @@
 import ErrorI from '../../utils/interfaces/ecxeptions.interface';
 import {
     AddExperienceI,
-    CandidateExperienceWithTagI,
+    ExperienceWithTagI,
 } from '../../utils/interfaces/experience.interface';
 import ExperienceService from './experience.service';
 
 const experienceService = new ExperienceService();
 
 export default {
-    helloworld: (): string => {
-        return `hello world`;
+    isAlive: (): string => {
+        return `Alive`;
     },
     retrieveCandidateExperience: async (input: {
         candidate_id: number;
-    }): Promise<CandidateExperienceWithTagI> => {
+    }): Promise<ExperienceWithTagI> => {
         try {
-            return await experienceService.getRetrieveCandidatesExperience(
+            return await experienceService.retrieveExperience(
                 input.candidate_id
             );
         } catch (error) {
@@ -23,7 +23,7 @@ export default {
             throw error;
         }
     },
-    addCandidateExperience: async (
+    addExperience: async (
         {
             input,
         }: {
@@ -34,8 +34,8 @@ export default {
         try {
             let current_candidate_id = context.candidate_id;
 
-            console.log(current_candidate_id)
-            return await experienceService.addCandidateExperience(
+            console.log(current_candidate_id);
+            return await experienceService.addExperience(
                 input,
                 current_candidate_id
             );
@@ -44,7 +44,7 @@ export default {
             throw error;
         }
     },
-    deleteCandidateExperience: async (
+    deleteExperience: async (
         input: {
             experienceId: number;
         },
@@ -52,7 +52,7 @@ export default {
     ): Promise<Boolean> => {
         try {
             let current_candidate_id: number = context.candidate_id;
-            return await experienceService.deleteCandidateExperience(
+            return await experienceService.deleteExperience(
                 input.experienceId,
                 current_candidate_id
             );

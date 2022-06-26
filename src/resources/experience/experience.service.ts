@@ -1,22 +1,19 @@
-import {
-    CandidateExperienceRepository,
-    CandidateTagRepository,
-} from './experience.repository';
+import { ExperienceRepository, TagRepository } from './experience.repository';
 import {
     AddExperienceI,
-    CandidateExperienceI,
-    CandidateExperienceWithTagI,
+    ExperienceI,
+    ExperienceWithTagI,
     CandidateTagI,
 } from '../../utils/interfaces/experience.interface';
 class ExperienceService {
-    private experienceRepo = CandidateExperienceRepository;
-    private tagsRpo = CandidateTagRepository;
+    private experienceRepo = ExperienceRepository;
+    private tagsRpo = TagRepository;
     /**
      * retrieve candidates with experiment
      */
-    public async getRetrieveCandidatesExperience(
+    public async retrieveExperience(
         candidate_id: number
-    ): Promise<CandidateExperienceWithTagI> {
+    ): Promise<ExperienceWithTagI> {
         try {
             let candidateExperience = await this.experienceRepo.findAll({
                 where: { candidate_id },
@@ -24,6 +21,7 @@ class ExperienceService {
             let candidateTag = await this.tagsRpo.findAll({
                 where: { candidate_id: candidate_id },
             });
+
             let tags: string[] = [];
             candidateTag.map((tag) => tags.push(tag.tag_name));
 
@@ -32,7 +30,7 @@ class ExperienceService {
             throw new Error('Unable to get retrieve candidate');
         }
     }
-    public async deleteCandidateExperience(
+    public async deleteExperience(
         experienceId: number,
         current_candidate_id: number
     ): Promise<Boolean> {
@@ -40,9 +38,11 @@ class ExperienceService {
             let experience = await this.experienceRepo.findOne({
                 where: { id: experienceId },
             });
+
             if (!experience) throw new Error("can't find entity");
             if (experience.candidate_id !== current_candidate_id)
                 throw new Error('Unauthorized');
+
             await this.experienceRepo.destroy({
                 where: { id: experienceId },
             });
@@ -52,12 +52,12 @@ class ExperienceService {
             throw error;
         }
     }
-    public async addCandidateExperience(
+    public async addExperience(
         input: AddExperienceI,
         current_candidate_id: number
     ): Promise<boolean> {
         try {
-            let db_experience: CandidateExperienceI = input.company;
+            let db_experience: ExperienceI = input.company;
             let db_tags: CandidateTagI[] = [];
 
             // preparing for the bulk create

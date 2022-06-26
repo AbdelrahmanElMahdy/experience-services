@@ -1,6 +1,6 @@
 import { number } from 'joi';
 
-interface CandidateExperienceI {
+interface ExperienceI {
     id?: number;
     candidate_id?: number;
     company_name: string;
@@ -13,18 +13,13 @@ interface CandidateTagI {
     tag_name: string;
 }
 
-interface CandidateExperienceWithTagI {
+interface ExperienceWithTagI {
     tags: string[];
-    companies: CandidateExperienceI[];
+    companies: ExperienceI[];
 }
 
 interface AddExperienceI {
     tags: string[];
-    company: CandidateExperienceI;
+    company: ExperienceI;
 }
-export {
-    CandidateTagI,
-    CandidateExperienceI,
-    CandidateExperienceWithTagI,
-    AddExperienceI
-};
+export { CandidateTagI, ExperienceI, ExperienceWithTagI, AddExperienceI };

@@ -7,4 +7,4 @@ RUN npm install
 RUN npm run build
 COPY .env ./dist/
 CMD ["npm","run","start"]
-EXPOSE 5000
+EXPOSE 5005

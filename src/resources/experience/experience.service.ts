@@ -33,15 +33,20 @@ class ExperienceService {
         }
     }
     public async deleteCandidateExperience(
-        experienceId: number
+        experienceId: number,
+        current_candidate_id: number
     ): Promise<Boolean> {
         try {
-            let experience = await this.experienceRepo.findOne({where:{ id: experienceId }})
-            if (! experience) throw new Error("can't find entity")
+            let experience = await this.experienceRepo.findOne({
+                where: { id: experienceId },
+            });
+            if (!experience) throw new Error("can't find entity");
+            if (experience.candidate_id !== current_candidate_id)
+                throw new Error('Unauthorized');
             await this.experienceRepo.destroy({
                 where: { id: experienceId },
             });
-            
+
             return true;
         } catch (error) {
             throw error;

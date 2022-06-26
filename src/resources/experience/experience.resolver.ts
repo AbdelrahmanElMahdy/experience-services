@@ -35,12 +35,17 @@ export default {
             throw error;
         }
     },
-    deleteCandidateExperience: async (input: {
-        experienceId: number;
-    }): Promise<Boolean> => {
+    deleteCandidateExperience: async (
+        input: {
+            experienceId: number;
+        },
+        context: any
+    ): Promise<Boolean> => {
         try {
+            let current_candidate_id: number = context.candidate_id;
             return await experienceService.deleteCandidateExperience(
-                input.experienceId
+                input.experienceId,
+                current_candidate_id
             );
         } catch (error) {
             console.log(error);

@@ -17,12 +17,14 @@ interface CandidateExperienceWithTagI {
     tags: string[];
     companies: CandidateExperienceI[];
 }
-interface addCandidateExperienceI extends CandidateExperienceWithTagI {
-    candidate_id: number;
+
+interface AddExperienceI {
+    tags: string[];
+    company: CandidateExperienceI;
 }
 export {
     CandidateTagI,
     CandidateExperienceI,
     CandidateExperienceWithTagI,
-    addCandidateExperienceI,
+    AddExperienceI
 };

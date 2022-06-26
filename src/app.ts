@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import express, { Application } from 'express';
+import express, { Request, Response, Application } from 'express';
 import cors from 'cors';
 import compression from 'compression';
 import morgan from 'morgan';
@@ -33,17 +33,17 @@ class App {
         this.express.use(express.json());
         this.express.use(express.urlencoded({ extended: false }));
         this.express.use(compression());
-        this.express.use(authenticatedMiddleware)
+        this.express.use(authenticatedMiddleware);
     }
     private initializeControllers(): void {
         this.express.use(
             '/graphql',
-            graphqlHTTP({
+            graphqlHTTP((request: any, response: any, graphqlParams: any) => ({
                 schema: buildSchema(experienceSchema),
                 rootValue: experienceResolver,
                 graphiql: true,
-                context:({req}:any)=>({req})
-            })
+                context: { candidate_id: request.candidate_id },
+            }))
         );
     }
     private async initializeDateBase(): Promise<void> {

@@ -2,8 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import token from '../utils/Token';
 import Token from '../utils/interfaces/auth.interface';
 import jwt from 'jsonwebtoken';
-import {GraphQLError } from 'graphql';
-
+import { GraphQLError } from 'graphql';
 
 declare global {
     namespace Express {
@@ -21,7 +20,9 @@ async function authenticatedMiddleware(
     const bearer = req.headers.authorization;
 
     if (!bearer || !bearer.startsWith('Bearer ')) {
-      return res.status(403).json("unauthorized")
+        return res
+            .status(403)
+            .json({ status: 'error', message: 'unauthorized' });
     }
     const accessToken = bearer.split('Bearer ')[1].trim();
     try {
@@ -29,14 +30,18 @@ async function authenticatedMiddleware(
             accessToken
         );
         if (payload instanceof jwt.JsonWebTokenError) {
-            return res.status(403).json("Unauthorized")
+            return res
+                .status(403)
+                .json({ status: 'error', message: 'unauthorized' });
         }
 
         req.candidate_id = payload.id;
         return next();
     } catch (error) {
-        console.log(error)
-        return res.status(403).json("Unauthorized")
+        console.log(error);
+        return res
+            .status(403)
+            .json({ status: 'error', message: 'unauthorized' });
     }
 }
 

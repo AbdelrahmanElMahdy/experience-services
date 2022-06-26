@@ -31,3 +31,8 @@ let's run this project
 **now, server is running**
 
 > you can find some of apis postman documentation for this project here [postman doc](https://documenter.getpostman.com/view/13580360/UzBsH4Yd)
+
+
+> there's an intelligent framework its name is @typegraphql for typescript and graphql I read about. will let you focus more on the busings logic. I recommend it for large project however i used regular approach as I'm familiar with it,and passing the context through graphqlHTTP was kinda painful and you don't have too much control the context which I discoverd it's very easy in  @typegraphql framework .
+
+

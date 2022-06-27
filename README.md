@@ -2,6 +2,7 @@
 
 experience services is a partially small micro service that provide functionality ex; adding his experience at
 candidates' previous companies
+<br><br>
 
 let's run this project
 
@@ -27,7 +28,10 @@ let's run this project
     -   make sure you have node.js & npm installed on your machine
     -   go inside root folder where package.json and run `npm install` to install required dependencies
     -   `npm run dev` for development `npm run start` for production
+> you can also run test cases using `npm run test` 
 
+
+<br><br>
 **now, server is running**
 
 > you can find some of apis postman documentation for this project here [postman doc](https://documenter.getpostman.com/view/13580360/UzBsH4Yd)
